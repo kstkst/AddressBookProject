@@ -1,2 +1,2 @@
 # CalculatorProject
-This is my address project written in c++
+This is my Calculator project written in java

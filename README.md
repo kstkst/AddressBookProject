@@ -1,2 +1,2 @@
-# CalculatorProject
-This is my Calculator project written in java
+# AddressBookProject
+This is my AddressBook project written in java

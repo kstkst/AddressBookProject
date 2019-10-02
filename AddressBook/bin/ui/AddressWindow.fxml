@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fillWidth="false" prefHeight="197.0" prefWidth="1000.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar prefHeight="32.0" prefWidth="1008.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox fillHeight="false" prefHeight="29.0" prefWidth="1012.0">
+               <children>
+                  <TextField id="select_name" prefHeight="29.0" prefWidth="216.0">
+                     <HBox.margin>
+                        <Insets left="10.0" right="5.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button id="btn_search" mnemonicParsing="false" prefHeight="29.0" prefWidth="120.0" text="검색">
+                     <HBox.margin>
+                        <Insets right="263.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button id="btn_insert" mnemonicParsing="false" prefHeight="29.0" prefWidth="120.0" text="추가">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button id="btn_update" mnemonicParsing="false" prefHeight="29.0" prefWidth="120.0" text="수정">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button id="btn_delete" mnemonicParsing="false" prefHeight="29.0" prefWidth="120.0" text="삭제" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="63.0" prefWidth="1000.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="     이름" textOrigin="CENTER" translateY="5.0" wrappingWidth="75.0">
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField id="txt_name" prefHeight="29.0" prefWidth="359.0">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="    관계" translateY="5.0" wrappingWidth="75.0">
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <ComboBox id="combo_relationship" fx:id="combo_relationship" prefHeight="29.0" prefWidth="359.0" promptText="선택하세요">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="55.0" prefWidth="1000.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="   이메일" textOrigin="CENTER" translateY="5.0" wrappingWidth="75.0">
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField id="txt_email" prefHeight="29.0" prefWidth="359.0">
+                     <padding>
+                        <Insets right="100.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" 전화번호" textOrigin="CENTER" translateY="5.0" wrappingWidth="75.0">
+                     <HBox.margin>
+                        <Insets right="3.0" />
+                     </HBox.margin>
+                  </Text>
+                  <TextField id="txt_phoneNumber" prefHeight="29.0" prefWidth="359.0" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <TableView layoutX="-3.0" layoutY="186.0" prefHeight="600.0" prefWidth="980.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <columns>
+          <TableColumn prefWidth="144.0" text="이름" />
+          <TableColumn minWidth="0.0" prefWidth="155.0" text="관계" />
+            <TableColumn minWidth="0.0" prefWidth="350.0" text="이메일" />
+            <TableColumn minWidth="0.0" prefWidth="330.0" text="전화번호" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

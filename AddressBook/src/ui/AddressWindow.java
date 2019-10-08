@@ -15,7 +15,7 @@ public class AddressWindow extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("AddressWindow.fxml"));
-		Scene scene = new Scene(root, 300, 275);
+		Scene scene = new Scene(root, 1000, 800);
 		
 		primaryStage.setTitle("AddressWindow");
 		primaryStage.setScene(scene);

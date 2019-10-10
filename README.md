@@ -15,7 +15,8 @@ This is my AddressBook project written in java
       - 데이터 처리 여부
       
  3. 목차
-    
+    1. UI 구현
+    2. 사용자로부터 데이터 DB insert
     
       
 # 2019-10-10 UI 및 데이터 입력 구현

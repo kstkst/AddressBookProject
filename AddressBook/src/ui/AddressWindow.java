@@ -77,8 +77,6 @@ public class AddressWindow extends Application implements Initializable {
 		table_phoneNumber.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_phoneNumber"));
 		addressTable.setItems(addressList);	
 		
-		
-		
 		return addressDAO.insertDB(name, relationship, email, phoneNumber);
 	}
 	

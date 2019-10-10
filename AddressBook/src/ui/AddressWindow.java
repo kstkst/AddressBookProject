@@ -49,26 +49,37 @@ public class AddressWindow extends Application implements Initializable {
 	private static String phoneNumber;
 	
 	public void initialize(URL url, ResourceBundle rb) {
-		
 		btn_insert.setOnAction(new EventHandler<ActionEvent>() {
 			boolean success;
 			public void handle(ActionEvent event) {
 				success = handleInsert(event);
 				if (success) {
-					
-					
+					System.out.println("입력 성공");		
 				}
 			}
 			
 		});
+	}
+	
+	@FXML
+	public boolean handleInsert(ActionEvent event) {
+		name = txt_name.getText();
+		relationship = combo_relationship.getValue().toString();
+		email = txt_email.getText();
+		phoneNumber = txt_phoneNumber.getText();
 		
-		btn_delete.setOnAction(new EventHandler<ActionEvent>() {
-
-			public void handle(ActionEvent arg0) {
-				
-			}
-			
-		});
+        ObservableList<AddressData> addressList = FXCollections.observableArrayList();
+		addressList.add(new AddressData(name, relationship, email, phoneNumber));
+		
+		table_name.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_name"));	
+		table_relationship.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_relationship"));
+		table_email.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_email"));
+		table_phoneNumber.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_phoneNumber"));
+		addressTable.setItems(addressList);	
+		
+		
+		
+		return addressDAO.insertDB(name, relationship, email, phoneNumber);
 	}
 	
 	
@@ -83,25 +94,6 @@ public class AddressWindow extends Application implements Initializable {
 		
 		primaryStage.setTitle("AddressWindow");
 		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-		 
+		primaryStage.show();				 
 	}
-	
-	@FXML
-	public boolean handleInsert(ActionEvent event) {
-		name = txt_name.getText();
-		relationship = combo_relationship.getValue().toString();
-		email = txt_email.getText();
-		phoneNumber = txt_phoneNumber.getText();
-        ObservableList<AddressData> addressList = FXCollections.observableArrayList();
-		addressList.add(new AddressData(name, relationship, email, phoneNumber));
-		table_name.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_name"));
-		table_relationship.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_relationship"));
-		table_email.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_email"));
-		table_phoneNumber.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_phoneNumber"));
-		addressTable.setItems(addressList);
-		return addressDAO.insertDB(name, relationship, email, phoneNumber);
-	}
-	
 }

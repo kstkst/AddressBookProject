@@ -2,18 +2,26 @@ package Background;
 
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * @class AddressData
+ * @author 박준석
+ * @Date 2019-10-10
+ * @brief TableView column에 데이터 값 삽입
+ */
 public class AddressData {
 	
 	private SimpleStringProperty table_name;
 	private SimpleStringProperty table_relationship;
 	private SimpleStringProperty table_email;
 	private SimpleStringProperty table_phoneNumber;
+	AddressDTO addressDTO = new AddressDTO();
 	
-	public AddressData(String name, String relationship, String email, String phoneNumber) {
-		this.table_name = new SimpleStringProperty(name);
-		this.table_relationship = new SimpleStringProperty(relationship);
-		this.table_email = new SimpleStringProperty(email);
-		this.table_phoneNumber = new SimpleStringProperty(phoneNumber);
+	// DTO 객체 값을 받는 생성자 메소드
+	public AddressData(AddressDTO addressDTO) {
+		this.table_name = new SimpleStringProperty(addressDTO.getName());
+		this.table_relationship = new SimpleStringProperty(addressDTO.getRelationship());
+		this.table_email = new SimpleStringProperty(addressDTO.getEmail());
+		this.table_phoneNumber = new SimpleStringProperty(addressDTO.getPhoneNumber());
 	}
 	
 	public String getTable_name() {

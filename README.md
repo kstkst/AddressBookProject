@@ -1,6 +1,8 @@
 # AddressBookProject
 This is my AddressBook project written in java
 
+# 개발환경 
+MYSQL 5.7, JAVA 1.8.0_221, JavaFx, eclipse 2018-09
 
 # HOME
  ### 1. 벤치마킹 개요
@@ -33,3 +35,4 @@ This is my AddressBook project written in java
       - TextField를 이용하여 사용자 데이터 입력
       - TableView 클래스를 이용하여 데이터 Display
     - EventHandler를 이용한 사용자 입력 데이터 DB Insert
+

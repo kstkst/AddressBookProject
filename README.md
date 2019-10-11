@@ -30,7 +30,7 @@ MYSQL 5.7, JAVA 1.8.0_221, JavaFx, eclipse 2018-09
     * 데이터 입력 유효성 검사
 
 ### 3. 개발진행사항
-    - JavaFX를 이용해 주소록 화면 UI 구현
+    - JavaFX를 이용해 주소록 UI 구현
       - Button 클래스를 활용하여 입력, 수정, 삭제 검색 버튼 제작
       - TextField를 이용하여 사용자 데이터 입력
       - TableView 클래스를 이용하여 데이터 Display

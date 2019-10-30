@@ -145,6 +145,18 @@ public class AddressWindow extends Application implements Initializable {
 		return addressDAO.insertDB(addressDTO);
 	}
 	
+	/**
+	 * 	@fn			private void showAddressDataDetails(AddressData addressData)
+	 *	@brief		1건 조회 시 text박스에 정보 입력
+	 *	@details
+	 *
+	 *	@author		한예나
+	 *	@date		2019-10-24
+	 *
+	 *	@param		AddressData addressData AddressData 값
+	 *  
+	 *	@remark		[2019-09-26; 한예나]
+	 */
 	private void showAddressDataDetails(AddressData addressData) {
 		txt_name.setText(addressData.getTable_name());
 		combo_relationship.setPromptText(addressData.getTable_relationship());

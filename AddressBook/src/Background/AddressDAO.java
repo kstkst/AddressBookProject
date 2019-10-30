@@ -114,51 +114,5 @@ public class AddressDAO {
 		}
 		return addressList;
 	}
-
-	
-	/**
-	 * 	@fn			public AddressDTO getDB(String name)
-	 *	@brief		1건 조회 기능
-	 *
-	 *	@author		한예나
-	 *	@date		2019-10-24
-	 *
-	 *	@param		String name 데이터베이스에 저장된 값
-	 *  
-	 *	@remark		데이터베이스에서 select하기 위해 sql 선언
-	 *				sql문을 실행하기 위해 rs 선언
-	 *				select 결과를 저장하기 위해 addressDTO 선언			[2019-10-24; 한예나]
-	 *
-	 *  @return     addressDTO
-	 */
-	public AddressDTO getDB(String name) {
-		connect();
-		AddressDTO addressDTO = new AddressDTO();
-		String sql = "select * from Address where id = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,name);
-
-			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-			
-			addressDTO.setId(rs.getInt("id"));
-			addressDTO.setName(rs.getString("name"));
-			addressDTO.setRelationship(rs.getString("relationship"));
-			addressDTO.setEmail(rs.getString("email"));
-			addressDTO.setPhoneNumber(rs.getString("phoneNumber"));
-			
-			rs.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			disconnect();
-		}
-		return addressDTO;
-	}
-	
 	
 }

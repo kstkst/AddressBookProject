@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -69,6 +70,12 @@ public class AddressWindow extends Application implements Initializable {
 		addressList = addressDAO.getDBList();
 		addressTable.getItems().addAll(addressList);
 		
+		//테이블 내의 데이터 편집 가능
+		table_name.setCellFactory(TextFieldTableCell.<AddressData>forTableColumn());
+		table_relationship.setCellFactory(TextFieldTableCell.<AddressData>forTableColumn());
+		table_email.setCellFactory(TextFieldTableCell.<AddressData>forTableColumn());
+		table_phoneNumber.setCellFactory(TextFieldTableCell.<AddressData>forTableColumn());
+		
 		// 추가 버튼 클릭 시
 		btn_insert.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -111,7 +118,6 @@ public class AddressWindow extends Application implements Initializable {
 				
 			}
 		});
-		
 	}
 	
 	/**
@@ -139,8 +145,6 @@ public class AddressWindow extends Application implements Initializable {
 		
 		return addressDAO.insertDB(addressDTO);
 	}
-	
-	
 	
 	public static void main(String[] args) {
 		launch(args);

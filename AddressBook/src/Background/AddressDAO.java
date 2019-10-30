@@ -24,13 +24,14 @@ public class AddressDAO {
 	ResultSet rs = null;
 	
 	String jdbc_driver = "com.mysql.cj.jdbc.Driver";
-	String jdbc_url = "jdbc:mysql://DB주소/DB이름?useUnicode=true&characterEncoding=UTF-8"; 
+//	String jdbc_url = "jdbc:mysql://DB주소/DB이름?useUnicode=true&characterEncoding=UTF-8"; 
+	String jdbc_url = "jdbc:mysql://127.0.0.1/jspdb?useSSL=true&verifyServerCertificate=false&serverTimezone=UTC";
 	
 	void connect() {
 		try {
 			Class.forName(jdbc_driver);
 			
-			conn = DriverManager.getConnection(jdbc_url, "db권한계정이름", "비밀번호");
+			conn = DriverManager.getConnection(jdbc_url, "jspbook", "1234");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -111,8 +112,9 @@ public class AddressDAO {
 		} finally {
 			disconnect();
 		}
-		
 		return addressList;
 	}
+
+	
 	
 }

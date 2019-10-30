@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,7 +26,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
 /**
@@ -56,6 +60,7 @@ public class AddressWindow extends Application implements Initializable {
 	
 	AddressDAO addressDAO = new AddressDAO();
 	AddressDTO addressDTO = new AddressDTO();
+	AddressData addressData = new AddressData(addressDTO);
 	
 	// 사용자 주소 정보를 저장하는 컬렉션 객체 생성
 	ObservableList<AddressData> addressList = FXCollections.observableArrayList();
@@ -69,11 +74,8 @@ public class AddressWindow extends Application implements Initializable {
 		// 주소 데이터 조회
 		addressList = addressDAO.getDBList();
 		addressTable.getItems().addAll(addressList);
-		
-		showAddressDataDetails(null);
-		
-		addressTable.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, newValue) -> showAddressDataDetails(newValue));
+		//테이블값 선택하기
+		AddressData addressData = addressTable.getSelectionModel().getSelectedItem();   
 		
 		// 추가 버튼 클릭 시
 		btn_insert.setOnAction(new EventHandler<ActionEvent>() {
@@ -92,7 +94,11 @@ public class AddressWindow extends Application implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-
+//				if (handleUpdate(event)) {
+//					System.out.println("Update 성공");		
+//				} else {
+//					System.out.println("Update 실패");
+//				}
 			}
 		
 		});
@@ -145,24 +151,16 @@ public class AddressWindow extends Application implements Initializable {
 		return addressDAO.insertDB(addressDTO);
 	}
 	
-	/**
-	 * 	@fn			private void showAddressDataDetails(AddressData addressData)
-	 *	@brief		1건 조회 시 text박스에 정보 입력
-	 *	@details
-	 *
-	 *	@author		한예나
-	 *	@date		2019-10-24
-	 *
-	 *	@param		AddressData addressData AddressData 값
-	 *  
-	 *	@remark		[2019-10-24; 한예나]
-	 */
-	private void showAddressDataDetails(AddressData addressData) {
-		txt_name.setText(addressData.getTable_name());
-		combo_relationship.setPromptText(addressData.getTable_relationship());
-		txt_email.setText(addressData.getTable_email());
-		txt_phoneNumber.setText(addressData.getTable_phoneNumber());
-	}
+//	@FXML
+//	public boolean handleUpdate(ActionEvent event) {
+//		//테이블의 값 가져오기
+//		addressTable.getSelectionModel().getSelectedItem().getTable_name();
+//		txt_name.setText(addressData.getTable_name());
+//		combo_relationship.setPromptText(addressData.getTable_relationship());
+//		txt_email.setText(addressData.getTable_email());
+//		txt_phoneNumber.setText(addressData.getTable_phoneNumber());
+//		return false;
+//	}
 
 	public static void main(String[] args) {
 		launch(args);
@@ -183,4 +181,5 @@ public class AddressWindow extends Application implements Initializable {
 		primaryStage.setResizable(false);
 		primaryStage.show();		
 	}
+
 }

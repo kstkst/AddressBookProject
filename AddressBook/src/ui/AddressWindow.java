@@ -70,11 +70,10 @@ public class AddressWindow extends Application implements Initializable {
 		addressList = addressDAO.getDBList();
 		addressTable.getItems().addAll(addressList);
 		
-		//테이블 내의 데이터 편집 가능
-		table_name.setCellFactory(TextFieldTableCell.<AddressData>forTableColumn());
-		table_relationship.setCellFactory(TextFieldTableCell.<AddressData>forTableColumn());
-		table_email.setCellFactory(TextFieldTableCell.<AddressData>forTableColumn());
-		table_phoneNumber.setCellFactory(TextFieldTableCell.<AddressData>forTableColumn());
+		showAddressDataDetails(null);
+		
+		addressTable.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> showAddressDataDetails(newValue));
 		
 		// 추가 버튼 클릭 시
 		btn_insert.setOnAction(new EventHandler<ActionEvent>() {
@@ -93,7 +92,7 @@ public class AddressWindow extends Application implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				
+
 			}
 		
 		});
@@ -146,6 +145,13 @@ public class AddressWindow extends Application implements Initializable {
 		return addressDAO.insertDB(addressDTO);
 	}
 	
+	private void showAddressDataDetails(AddressData addressData) {
+		txt_name.setText(addressData.getTable_name());
+		combo_relationship.setPromptText(addressData.getTable_relationship());
+		txt_email.setText(addressData.getTable_email());
+		txt_phoneNumber.setText(addressData.getTable_phoneNumber());
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}

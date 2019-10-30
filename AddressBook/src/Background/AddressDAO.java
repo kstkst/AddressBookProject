@@ -115,4 +115,60 @@ public class AddressDAO {
 		return addressList;
 	}
 	
+	public AddressDTO getDB(String name) {
+		
+		connect();
+		AddressDTO addressDTO = new AddressDTO();
+		String sql = "select * from Address where name = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,name);
+			ResultSet rs = pstmt.executeQuery();
+
+			rs.next();
+
+			addressDTO.setId(rs.getInt("id"));
+			addressDTO.setName(rs.getString("name"));
+			addressDTO.setRelationship(rs.getString("relationship"));
+			addressDTO.setEmail(rs.getString("email"));
+			addressDTO.setPhoneNumber(rs.getString("phoneNumber"));
+			
+			rs.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			disconnect();
+		}
+		return addressDTO;
+	}
+
+	public boolean updateDB(AddressDTO addressDTO) {
+		
+		connect();
+		String sql ="update Address set name=?, relationship=?, email, phoneNumber where id=?";
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, addressDTO.getName());
+			pstmt.setString(2, addressDTO.getRelationship());
+			pstmt.setString(3, addressDTO.getEmail());
+			pstmt.setString(4, addressDTO.getPhoneNumber());
+			pstmt.setInt(5, addressDTO.getId());
+
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			disconnect();
+		}
+		return true;
+	}
 }

@@ -115,6 +115,20 @@ public class AddressDAO {
 		return addressList;
 	}
 	
+	/**
+	 * 	@fn			AddressDTO getDB(String name)
+	 *	@brief		1건 조회
+	 *	@details
+	 *
+	 *	@author		한예나
+	 *	@date		2019-10-30
+	 *
+	 *	@param		String name 데이터베이스에 저장된 값
+	 *  
+	 *	@remark		데이터베이스에서 select하기 위해 sql 선언
+	 *				sql문을 실행하기 위해 rs 선언
+	 *				select 결과를 저장하기 위해 bookDTO 선언			[2019-10-30; 한예나]
+	 */
 	public AddressDTO getDB(String name) {
 		
 		connect();
@@ -145,30 +159,4 @@ public class AddressDAO {
 		return addressDTO;
 	}
 
-	public boolean updateDB(AddressDTO addressDTO) {
-		
-		connect();
-		String sql ="update Address set name=?, relationship=?, email, phoneNumber where id=?";
-		
-		try {
-			
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, addressDTO.getName());
-			pstmt.setString(2, addressDTO.getRelationship());
-			pstmt.setString(3, addressDTO.getEmail());
-			pstmt.setString(4, addressDTO.getPhoneNumber());
-			pstmt.setInt(5, addressDTO.getId());
-
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		finally {
-			disconnect();
-		}
-		return true;
-	}
 }

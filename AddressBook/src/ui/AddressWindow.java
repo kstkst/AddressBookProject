@@ -155,7 +155,7 @@ public class AddressWindow extends Application implements Initializable {
 	 *
 	 *	@param		AddressData addressData AddressData 값
 	 *  
-	 *	@remark		[2019-09-26; 한예나]
+	 *	@remark		[2019-10-24; 한예나]
 	 */
 	private void showAddressDataDetails(AddressData addressData) {
 		txt_name.setText(addressData.getTable_name());

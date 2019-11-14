@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>메뉴</title>
+	<link rel="stylesheet" href="/boardB/board.css" type="text/css" media="screen" />
+	
+	
+	<script type="text/javascript">
+	    window.onload = function () {
+	    	
+	        // list 선택 
+	        document.getElementById('list').onclick = function () {
+	        	
+	        	document.location.href="/board/boardB/BoardController?action=list";
+	        };
+	        
+	        // add 선택 
+	        document.getElementById('add').onclick = function () {
+	        	
+	        	document.location.href="/board/boardB/BoardController?action=add";
+	        };
+
+	    };
+	
+	</script>
+		
+		
+</head>
+
+<body>
+
+	<H2 id="list">B유형 게시판목록 조회</H2>
+	<H2 id="add">B유형 게시판 입력</H2>
+
+</body>
+</html>

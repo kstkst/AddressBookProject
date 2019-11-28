@@ -94,11 +94,11 @@ public class AddressWindow extends Application implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-//				if (handleUpdate(event)) {
-//					System.out.println("Update 성공");		
-//				} else {
-//					System.out.println("Update 실패");
-//				}
+				if (handleUpdate(event)) {
+					System.out.println("Update 성공");		
+				} else {
+					System.out.println("Update 실패");
+				}
 			}
 		
 		});
@@ -162,16 +162,33 @@ public class AddressWindow extends Application implements Initializable {
 		return false;
 	}
 	
-//	@FXML
-//	public boolean handleUpdate(ActionEvent event) {
-//		//테이블의 값 가져오기
-//		addressTable.getSelectionModel().getSelectedItem().getTable_name();
-//		txt_name.setText(addressData.getTable_name());
-//		combo_relationship.setPromptText(addressData.getTable_relationship());
-//		txt_email.setText(addressData.getTable_email());
-//		txt_phoneNumber.setText(addressData.getTable_phoneNumber());
-//		return false;
-//	}
+	@FXML
+	public boolean handleUpdate(ActionEvent event) {
+
+		int selectIndex = addressTable.getSelectionModel().getSelectedIndex();
+		if (selectIndex>=0) {
+			addressTable.getItems().remove(selectIndex);
+		}
+		
+		//DTO 객체에 입력 값 세팅
+		addressDTO.setName(txt_name.getText());
+		addressDTO.setRelationship(combo_relationship.getValue().toString());
+		addressDTO.setEmail(txt_email.getText());
+		addressDTO.setPhoneNumber(txt_phoneNumber.getText());
+		
+		//세팅한 DTO를 AddressData 객체에 넣은 후 앞서 정의한 list 객체에 해당 값 추가
+		addressList.add(new AddressData(addressDTO));
+		
+		//정의되어 있는 각각의 테이블 컬럼들의 해당 주소 값 삽입
+		table_name.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_name"));	
+		table_relationship.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_relationship"));
+		table_email.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_email"));
+		table_phoneNumber.setCellValueFactory(new PropertyValueFactory<AddressData, String>("table_phoneNumber"));
+		addressTable.setItems(addressList);
+		
+		return addressDAO.insertDB(addressDTO);
+	}
+		
 
 	public static void main(String[] args) {
 		launch(args);

@@ -49,7 +49,7 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btn_update" mnemonicParsing="false" prefHeight="29.0" prefWidth="120.0" text="수정">
+                  <Button fx:id="btn_update" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="29.0" prefWidth="120.0" text="수정">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>

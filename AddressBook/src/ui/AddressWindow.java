@@ -173,6 +173,19 @@ public class AddressWindow extends Application implements Initializable {
 		}
 		return false;
 	}
+
+	/**
+	 * 	@fn			handleUpdate(ActionEvent event)
+	 *	@brief		1건 수정
+	 *
+	 *	@author		김성택
+	 *	@date		2019-11-28
+	 *
+	 *	@param		ActionEvent event 에서 전달된  값
+	 *  
+	 *	@remark		테이블에서 넘어온 인덱스 값을 remove로 삭제
+	 *				삭제된 자리에 setItems 으로 데이터 입력			[2019-11-28; 김성택]
+	 */
 	
 	@FXML
 	public boolean handleUpdate(ActionEvent event) {

@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,7 +25,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
 /**
@@ -55,6 +60,7 @@ public class AddressWindow extends Application implements Initializable {
 	
 	AddressDAO addressDAO = new AddressDAO();
 	AddressDTO addressDTO = new AddressDTO();
+	AddressData addressData = new AddressData(addressDTO);
 	
 	// 사용자 주소 정보를 저장하는 컬렉션 객체 생성
 	ObservableList<AddressData> addressList = FXCollections.observableArrayList();
@@ -68,6 +74,8 @@ public class AddressWindow extends Application implements Initializable {
 		// 주소 데이터 조회
 		addressList = addressDAO.getDBList();
 		addressTable.getItems().addAll(addressList);
+		//테이블값 선택하기
+		AddressData addressData = addressTable.getSelectionModel().getSelectedItem();   
 		
 		// 추가 버튼 클릭 시
 		btn_insert.setOnAction(new EventHandler<ActionEvent>() {
@@ -86,7 +94,11 @@ public class AddressWindow extends Application implements Initializable {
 
 			@Override
 			public void handle(ActionEvent event) {
-				
+//				if (handleUpdate(event)) {
+//					System.out.println("Update 성공");		
+//				} else {
+//					System.out.println("Update 실패");
+//				}
 			}
 		
 		});
@@ -95,11 +107,13 @@ public class AddressWindow extends Application implements Initializable {
 		btn_delete.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				
+			public void handle(ActionEvent event) {			 
+				if (handleDelete(event)) {
+					System.out.println("Insert 성공");		
+				} else {
+					System.out.println("Insert 실패");
+				}
 			}
-			
 		});
 		
 		// 검색 버튼 클릭 시
@@ -111,7 +125,6 @@ public class AddressWindow extends Application implements Initializable {
 				
 			}
 		});
-		
 	}
 	
 	/**
@@ -140,8 +153,26 @@ public class AddressWindow extends Application implements Initializable {
 		return addressDAO.insertDB(addressDTO);
 	}
 	
+	@FXML
+	public boolean handleDelete(ActionEvent event) {
+		int selectIndex = addressTable.getSelectionModel().getSelectedIndex();
+		if (selectIndex>=0) {
+			addressTable.getItems().remove(selectIndex);
+		}
+		return false;
+	}
 	
-	
+//	@FXML
+//	public boolean handleUpdate(ActionEvent event) {
+//		//테이블의 값 가져오기
+//		addressTable.getSelectionModel().getSelectedItem().getTable_name();
+//		txt_name.setText(addressData.getTable_name());
+//		combo_relationship.setPromptText(addressData.getTable_relationship());
+//		txt_email.setText(addressData.getTable_email());
+//		txt_phoneNumber.setText(addressData.getTable_phoneNumber());
+//		return false;
+//	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -161,4 +192,5 @@ public class AddressWindow extends Application implements Initializable {
 		primaryStage.setResizable(false);
 		primaryStage.show();		
 	}
+
 }

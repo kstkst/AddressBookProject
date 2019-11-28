@@ -2,6 +2,11 @@ package ui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import Background.AddressDAO;
@@ -218,6 +223,75 @@ public class AddressWindow extends Application implements Initializable {
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	String jdbc_driver = "com.mysql.cj.jdbc.Driver";
+//	String jdbc_url = "jdbc:mysql://DB주소/DB이름?useUnicode=true&characterEncoding=UTF-8"; 
+	String jdbc_url = "jdbc:mysql://127.0.0.1/jspdb?useSSL=true&verifyServerCertificate=false&serverTimezone=UTC";
+	
+	void connect() {
+		try {
+			Class.forName(jdbc_driver);
+			
+			conn = DriverManager.getConnection(jdbc_url, "jspbook", "1234");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	void disconnect() {
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@FXML
+	public boolean handleSearch(ActionEvent event) {
+
+		connect();
+		AddressDTO addressDTO = new AddressDTO();
+		String sql = "select * from Address where name = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,name);
+			ResultSet rs = pstmt.executeQuery();
+
+			rs.next();
+
+			addressDTO.setId(rs.getInt("id"));
+			addressDTO.setName(rs.getString("name"));
+			addressDTO.setRelationship(rs.getString("relationship"));
+			addressDTO.setEmail(rs.getString("email"));
+			addressDTO.setPhoneNumber(rs.getString("phoneNumber"));
+			
+			rs.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			disconnect();
+		}
+		return addressDTO;
+	}
+
+	}	
 	
 	/**
 	 * @function

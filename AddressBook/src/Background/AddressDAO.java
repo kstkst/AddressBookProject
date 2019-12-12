@@ -147,7 +147,7 @@ public class AddressDAO {
 			addressDTO.setRelationship(rs.getString("relationship"));
 			addressDTO.setEmail(rs.getString("email"));
 			addressDTO.setPhoneNumber(rs.getString("phoneNumber"));
-			
+			addressList.add(new AddressData(addressDTO));
 			rs.close();
 			
 		} catch (SQLException e) {
@@ -156,7 +156,7 @@ public class AddressDAO {
 		finally {
 			disconnect();
 		}
-		return addressDTO;
+		return true;
 	}
 	
 

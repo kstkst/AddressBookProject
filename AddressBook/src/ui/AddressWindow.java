@@ -114,9 +114,9 @@ public class AddressWindow extends Application implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {			 
 				if (handleDelete(event)) {
-					System.out.println("Insert 성공");		
+					System.out.println("delete 성공");		
 				} else {
-					System.out.println("Insert 실패");
+					System.out.println("delete 실패");
 				}
 			}
 		});
@@ -125,9 +125,12 @@ public class AddressWindow extends Application implements Initializable {
 		btn_search.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				
+			public void handle(ActionEvent event) {			 
+				if (handleDelete(event)) {
+					System.out.println("search 성공");		
+				} else {
+					System.out.println("search 실패");
+				}
 			}
 		});
 	}
@@ -225,6 +228,9 @@ public class AddressWindow extends Application implements Initializable {
 	}
 
 	
+	
+	
+	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -262,36 +268,12 @@ public class AddressWindow extends Application implements Initializable {
 	
 	@FXML
 	public boolean handleSearch(ActionEvent event) {
+		addressDAO.getDB(txt_name.getText());
+		addressList.add(new AddressData(addressDTO));
+		return true;
 
-		connect();
-		AddressDTO addressDTO = new AddressDTO();
-		String sql = "select * from Address where name = ?";
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,name);
-			ResultSet rs = pstmt.executeQuery();
-
-			rs.next();
-
-			addressDTO.setId(rs.getInt("id"));
-			addressDTO.setName(rs.getString("name"));
-			addressDTO.setRelationship(rs.getString("relationship"));
-			addressDTO.setEmail(rs.getString("email"));
-			addressDTO.setPhoneNumber(rs.getString("phoneNumber"));
-			
-			rs.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
-			disconnect();
-		}
-		return addressDTO;
 	}
 
-	}	
 	
 	/**
 	 * @function

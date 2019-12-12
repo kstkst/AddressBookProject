@@ -136,10 +136,17 @@ public class AddressWindow extends Application implements Initializable {
 	}
 	
 	/**
-	 * @function
-	 * @brief 추가 버튼 클릭 이벤트 시 입력된 데이터를 DB로 insert
-	 * @return Insert 성공 유무
+	 * 	@fn			handleInsert(ActionEvent event)
+	 *	@brief		1건 입력
+	 *
+	 *	@author		김성택
+	 *	@date		2019-12-12
+	 *
+	 *	@param		ActionEvent event 에서 전달된  값
+	 *  
+	 *	@remark		테이블에서 넘어온 인덱스 값을 테이블에 입력			[2019-12-12; 김성택]
 	 */
+	
 	@FXML
 	public boolean handleInsert(ActionEvent event) {
 		//DTO 객체에 입력 값 세팅
@@ -265,6 +272,19 @@ public class AddressWindow extends Application implements Initializable {
 			}
 		}
 	}
+	
+	/**
+	 * 	@fn			handleSearch(ActionEvent event)
+	 *	@brief		1건 검색
+	 *
+	 *	@author		김성택
+	 *	@date		2019-12-12
+	 *
+	 *	@param		ActionEvent event 에서 전달된  값
+	 *  
+	 *	@remark		테이블에서 넘어온 name을 DB에서 조회후 1열 출력
+	 *				(기존 값과 중복되서 값이 반영되지 않음)					[2019-12-12; 김성택]	
+	 */
 	
 	/*
 	 * @FXML public boolean handleSearch(ActionEvent event) { addressList=

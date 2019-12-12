@@ -129,9 +129,10 @@ public class AddressDAO {
 	 *				sql문을 실행하기 위해 rs 선언
 	 *				select 결과를 저장하기 위해 bookDTO 선언			[2019-10-30; 한예나]
 	 */
-	public AddressDTO getDB(String name) {
+	public ObservableList<AddressData> getDB(String name) {
 		
 		connect();
+		ObservableList<AddressData> addressList = FXCollections.observableArrayList();
 		AddressDTO addressDTO = new AddressDTO();
 		String sql = "select * from Address where name = ?";
 		
@@ -156,7 +157,7 @@ public class AddressDAO {
 		finally {
 			disconnect();
 		}
-		return true;
+		return addressList;
 	}
 	
 

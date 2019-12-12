@@ -266,13 +266,14 @@ public class AddressWindow extends Application implements Initializable {
 		}
 	}
 	
-	@FXML
-	public boolean handleSearch(ActionEvent event) {
-		addressDAO.getDB(txt_name.getText());
-		addressList.add(new AddressData(addressDTO));
-		return true;
-
-	}
+	/*
+	 * @FXML public boolean handleSearch(ActionEvent event) { addressList=
+	 * addressDAO.getDB(txt_name.getText());
+	 * 
+	 * addressTable.getItems().addAll(addressList); return true;
+	 * 
+	 * }
+	 */
 
 	
 	/**
